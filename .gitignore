@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.frames/
+.DS_Store
+*.log
+.env*
+!.env.example
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Handoff artifact: the git bundle is generated for the OneDrive delivery, not tracked here.
+rucutz-premium-grooming.bundle

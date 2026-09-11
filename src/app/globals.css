@@ -1,0 +1,417 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   RuCutz Premium Grooming — "Gold Standard" design tokens
+   Palette sampled from Ru's own logo pixels (3500px banner). Measured contrast
+   ratios live in DESIGN.md and are enforced by `npm run audit:contrast`.
+   ========================================================================== */
+@theme {
+  /* Ground: matte black, never pure #000 */
+  --color-ink: #0b0a08;
+  --color-ink-2: #12100d;
+  --color-ink-3: #1b1814;
+  --color-ink-4: #26221c;
+  --color-line: #332d24;
+
+  /* Text on dark */
+  --color-bone: #f2ece1;
+  --color-bone-dim: #b8ae9f;
+  --color-bone-mute: #8f8677;
+
+  /* Gold, from the logo gradient */
+  --color-gold: #d8a848;
+  --color-gold-lift: #f6d77f;
+  --color-gold-deep: #b87008;
+  --color-bronze: #82530c;
+  /* Gold-family text for LIGHT grounds only (bone/paper) */
+  --color-bronze-ink: #6b430a;
+
+  /* Light reading ground */
+  --color-paper: #f2ece1;
+  --color-paper-2: #e7dfd1;
+
+  --font-display: var(--font-shoulders), "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-tag: var(--font-rocksalt), "Marker Felt", "Comic Sans MS", cursive;
+
+  --radius-sharp: 2px;
+  --radius-card: 6px;
+
+  --ease-cut: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-gold: 0 0 0 1px rgb(216 168 72 / 0.35), 0 20px 60px -20px rgb(216 168 72 / 0.35);
+}
+
+:root {
+  color-scheme: dark;
+  --gold-foil: linear-gradient(100deg, #b87008 0%, #d8a848 25%, #f6d77f 50%, #d8a848 75%, #b87008 100%);
+  --header-h: 72px;
+}
+
+html {
+  background: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* ---------- Type ---------- */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.005em;
+}
+
+@utility tag {
+  font-family: var(--font-tag);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+  word-spacing: 0.22em;
+  text-transform: none;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@utility foil {
+  background: var(--gold-foil);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Fine gold rule used as section dividers */
+/* Brighter foil for large type: never drops to the dark bronze stops */
+@utility foil-text {
+  background: linear-gradient(100deg, #c4851e 0%, #d8a848 22%, #f6d77f 45%, #e7bc5e 60%, #d8a848 78%, #c4851e 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(216 168 72 / 0.55), transparent);
+}
+
+/* ---------- Buttons ---------- */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.86rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sharp);
+  transition:
+    transform 0.35s var(--ease-cut),
+    background-color 0.25s,
+    color 0.25s,
+    box-shadow 0.35s var(--ease-cut),
+    border-color 0.25s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+@utility btn-gold {
+  background: var(--gold-foil);
+  background-size: 220% 100%;
+  background-position: 30% 50%;
+  color: var(--color-ink);
+  box-shadow: 0 10px 30px -12px rgb(216 168 72 / 0.55);
+  &:hover {
+    background-position: 70% 50%;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -14px rgb(216 168 72 / 0.7);
+  }
+}
+
+@utility btn-ghost {
+  border: 1px solid rgb(216 168 72 / 0.55);
+  color: var(--color-bone);
+  &:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold-lift);
+    background: rgb(216 168 72 / 0.06);
+  }
+}
+
+/* ---------- Reveal-on-scroll (IntersectionObserver adds .is-in) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-cut),
+    transform 0.9s var(--ease-cut);
+  transition-delay: var(--d, 0ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Spray-paint tag reveal: a soft-edged mask sweeps left→right */
+.spray {
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 60%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  transition:
+    -webkit-mask-position 1.4s var(--ease-cut),
+    mask-position 1.4s var(--ease-cut),
+    filter 1.4s var(--ease-cut);
+  filter: blur(3px);
+}
+.spray.is-in {
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+  filter: blur(0);
+}
+
+/* Marquee */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee var(--marquee-dur, 38s) linear infinite;
+  will-change: transform;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+.shimmer {
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(107 214 140 / 0.55); }
+  60% { box-shadow: 0 0 0 7px rgb(107 214 140 / 0); }
+}
+
+/* Visible marker for missing real assets — impossible to ship silently */
+.needs-asset {
+  background:
+    repeating-linear-gradient(135deg, rgb(216 168 72 / 0.08) 0 12px, transparent 12px 24px),
+    var(--color-ink-3);
+  outline: 1px dashed rgb(216 168 72 / 0.6);
+  outline-offset: -8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .spray {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+}
+
+/* Long-form article typography */
+.prose-ru p {
+  margin: 0 0 1.2em;
+  color: var(--color-bone-dim);
+}
+.prose-ru h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  line-height: 1;
+  color: var(--color-bone);
+  margin: 2em 0 0.6em;
+}
+.prose-ru ul {
+  margin: 0 0 1.4em;
+  padding: 0;
+  list-style: none;
+}
+.prose-ru li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.6em;
+  color: var(--color-bone-dim);
+}
+.prose-ru li::before {
+  content: "";
+  position: absolute;
+  left: 0.2em;
+  top: 0.72em;
+  width: 0.7em;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+/* Logo trace: each contour is stroked on, then the gold fill floods in. */
+.logo-draw .logo-strokes path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: logo-trace 1.8s var(--ease-cut) forwards, logo-stroke-out 0.8s ease 2.2s forwards;
+}
+.logo-draw .logo-fill {
+  opacity: 0;
+  animation: logo-fill 1s ease 1.5s forwards;
+}
+@keyframes logo-trace { to { stroke-dashoffset: 0; } }
+@keyframes logo-stroke-out { to { stroke-opacity: 0; } }
+@keyframes logo-fill { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-draw .logo-strokes { display: none; }
+  .logo-draw .logo-fill { opacity: 1; animation: none; }
+}
+
+/* Load-time entrance for above-the-fold content (no JS required). */
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 1s var(--ease-cut) both; animation-delay: var(--d, 0ms); }
+@keyframes spray-in {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; filter: blur(3px); }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; filter: blur(0); }
+}
+.spray-in {
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 60%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  animation: spray-in 1.5s var(--ease-cut) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes hero-zoom { from { transform: scale(1.12); } to { transform: scale(1); } }
+.hero-zoom { animation: hero-zoom 2.4s var(--ease-cut) both; }
+@media (prefers-reduced-motion: reduce) {
+  .spray-in { -webkit-mask-image: none; mask-image: none; }
+}
+
+/* ---------- Ritual: stacked on mobile, pinned stage on desktop (JS adds .is-pinned) ---------- */
+.ritual.is-pinned .ritual-stage {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-top: calc(var(--header-h) + 2.5rem);
+  padding-bottom: 2.5rem;
+}
+.ritual.is-pinned .ritual-body {
+  position: relative;
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  gap: 2rem;
+  min-height: 0;
+}
+.ritual.is-pinned .ritual-steps {
+  position: relative;
+  display: block;
+  min-height: 0;
+}
+.ritual.is-pinned .ritual-step {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.ritual.is-pinned .ritual-img {
+  order: 0 !important;
+  height: 100%;
+  aspect-ratio: auto;
+}
+.ritual.is-pinned .ritual-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ritual.is-pinned .ritual-cta {
+  margin-top: 1.5rem;
+}
+.ritual.is-pinned .ritual-head p.tag { margin-bottom: 0.25rem; }
+.ritual.is-pinned .ritual-head h2 { font-size: clamp(2.2rem, 4.2vw, 3.6rem); }
+.ritual.is-pinned .ritual-head > p:last-child { font-size: 1rem; margin-top: 0.75rem; }
+/* The pinned stage has its own step counter in the meter, so the oversized number is redundant. */
+.ritual.is-pinned .ritual-text > p:first-child { display: none; }
+.ritual.is-pinned .ritual-text h3 { font-size: clamp(2.6rem, 5vw, 4.4rem); }
+.ritual.is-pinned .ritual-text > p:last-child { font-size: 1.15rem; max-width: 34ch; }
