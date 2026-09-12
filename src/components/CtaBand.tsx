@@ -14,7 +14,7 @@ export function CtaBand({ title = "Your chair is waiting.", text = "Advance sche
         <p className="spray tag -rotate-2 text-[clamp(1.3rem,2.4vw,1.9rem)] text-gold" aria-hidden>
           lock in your experience
         </p>
-        <h2 id="cta-title" className="reveal display mt-3 text-[clamp(3.2rem,9vw,7.5rem)]">
+        <h2 id="cta-title" className="reveal display mt-3 text-[clamp(2.4rem,10vw,7.5rem)] sm:text-[clamp(3.2rem,9vw,7.5rem)]">
           {title}
         </h2>
         <p className="reveal mx-auto mt-6 max-w-xl text-lg text-bone-dim">{text}</p>

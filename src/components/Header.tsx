@@ -115,17 +115,19 @@ export function Header() {
       <div
         id="mobile-menu"
         className={cn(
-          "grain fixed inset-0 z-40 flex flex-col bg-ink px-6 pb-8 pt-[calc(var(--header-h)+24px)] transition-[opacity,visibility] duration-500 lg:hidden",
+          // z-45: above the mobile book bar (z-40), below the header (z-50). Scrolls on short screens (landscape phones, iPhone SE).
+          "grain fixed inset-0 z-[45] flex flex-col overflow-y-auto overscroll-contain bg-ink px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(var(--header-h)+24px)] transition-[opacity,visibility] duration-500 lg:hidden",
           open ? "visible opacity-100" : "invisible opacity-0",
         )}
         aria-hidden={!open}
         inert={!open}
+        data-lenis-prevent
       >
         <nav aria-label="Mobile">
           <ul className="space-y-1">
             {[{ href: "/", label: "Home" }, ...NAV, { href: "/journal/", label: "Journal" }].map((n, i) => (
               <li key={n.href} style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }} className={cn("transition-[opacity,transform] duration-500", open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0")}>
-                <Link href={n.href} className={cn("display block py-1.5 text-[2.7rem]", isActive(n.href) && n.href !== "/" ? "foil-text" : "text-bone")}>
+                <Link href={n.href} className={cn("display block py-1.5 text-[2.7rem] [@media(max-height:500px)]:py-1 [@media(max-height:500px)]:text-[2rem]", isActive(n.href) && n.href !== "/" ? "foil-text" : "text-bone")}>
                   {n.label}
                 </Link>
               </li>

@@ -100,7 +100,8 @@ export function ScratchOffer() {
     const lenis = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
     lenis?.stop();
     const d = dialog.current;
-    d?.querySelector<HTMLElement>("[data-autofocus]")?.focus();
+    // preventScroll: on short screens the dialog scrolls, and it should open at the top (close button + title), not at the focused button.
+    d?.querySelector<HTMLElement>("[data-autofocus]")?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
       if (e.key === "Tab" && d) {
@@ -157,7 +158,8 @@ export function ScratchOffer() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="offer-title"
-        className="rise relative w-full max-w-md overflow-hidden rounded-[4px] border border-gold/40 bg-ink-2 p-7 shadow-gold"
+        data-lenis-prevent
+        className="rise relative max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto overflow-x-hidden overscroll-contain rounded-[4px] border border-gold/40 bg-ink-2 p-7 shadow-gold [@media(max-height:500px)]:p-5"
       >
         <button type="button" onClick={() => setOpen(false)} className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-bone-dim hover:text-bone" aria-label="Close offer">
           <X className="h-5 w-5" aria-hidden />

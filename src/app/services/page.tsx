@@ -56,7 +56,7 @@ export default function ServicesPage() {
           {GROUPS.map((g) => {
             const items = SERVICES.filter((s) => s.category === g.id);
             return (
-              <div key={g.id} className="grid gap-8 lg:grid-cols-[340px_1fr] lg:gap-16">
+              <div key={g.id} className="grid gap-8 lg:grid-cols-[380px_1fr] lg:gap-16">
                 <div className="lg:sticky lg:top-28 lg:self-start">
                   <h2 className="reveal display text-[clamp(2.2rem,4vw,3.2rem)]">{g.title}</h2>
                   <p className="reveal mt-3 text-bone-dim">{g.note}</p>
@@ -75,7 +75,7 @@ export default function ServicesPage() {
             );
           })}
 
-          <div className="grid gap-8 lg:grid-cols-[340px_1fr] lg:gap-16">
+          <div className="grid gap-8 lg:grid-cols-[380px_1fr] lg:gap-16">
             <div className="lg:sticky lg:top-28 lg:self-start">
               <h2 className="reveal display text-[clamp(2.2rem,4vw,3.2rem)]">Add-ons</h2>
               <p className="reveal mt-3 text-bone-dim">Stack them onto any Experience when you book.</p>

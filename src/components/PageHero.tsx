@@ -33,7 +33,7 @@ export function PageHero({ tag, title, intro, crumbs, children }: { tag: string;
         <p className="spray-in tag mb-5 -rotate-2 text-[clamp(1.3rem,2.4vw,1.9rem)] text-gold" aria-hidden style={{ ["--d" as string]: "300ms" }}>
           {tag}
         </p>
-        <h1 className="rise display max-w-5xl text-[clamp(3.2rem,9vw,7.4rem)]" style={{ ["--d" as string]: "100ms" }}>
+        <h1 className="rise display max-w-5xl text-[clamp(2.4rem,10vw,7.4rem)] sm:text-[clamp(3.2rem,9vw,7.4rem)]" style={{ ["--d" as string]: "100ms" }}>
           {title}
         </h1>
         {intro && (

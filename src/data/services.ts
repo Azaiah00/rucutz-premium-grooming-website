@@ -329,3 +329,6 @@ export const MAIN_SERVICES = SERVICES.filter((s) => s.category !== "addon");
 
 export const fmtDuration = (m: number) =>
   m >= 60 ? `${Math.floor(m / 60)} hr${m % 60 ? ` ${m % 60} min` : ""}` : `${m} min`;
+
+/** "the King Haircut", but never "the The Distinguished". */
+export const withThe = (name: string) => (/^the\s/i.test(name) ? name : `the ${name}`);

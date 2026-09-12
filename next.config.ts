@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   poweredByHeader: false,
+  // Hide the Next.js badge in dev. Compile and runtime errors still surface.
+  devIndicators: false,
 };
 
 export default nextConfig;

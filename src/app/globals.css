@@ -69,6 +69,42 @@ body {
   color: var(--color-ink);
 }
 
+/* Scrollbar: a foil-gold thumb on a matte-black rail, square corners.
+   Chrome/Edge/Safari take the ::-webkit-scrollbar rules; Firefox takes the standard ones.
+   (Chrome ignores ::-webkit-scrollbar once scrollbar-color is set, hence the @supports split.) */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+  border-left: 1px solid var(--color-line);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-gold-deep), var(--color-gold) 50%, var(--color-gold-deep));
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: var(--radius-sharp);
+  min-height: 48px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-gold), var(--color-gold-lift) 50%, var(--color-gold));
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-gold-lift);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-corner {
+  background: var(--color-ink);
+}
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: var(--color-gold-deep) var(--color-ink);
+    scrollbar-width: thin;
+  }
+}
+
 :focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
@@ -173,6 +209,14 @@ html.lenis body {
     border-color 0.25s;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+  max-width: 100%;
+  /* Small phones: long labels ("Book the King Haircut · $60") wrap instead of pushing past the gutter. */
+  @media (max-width: 400px) {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+    padding-block: 0.7rem;
+  }
 }
 
 @utility btn-gold {

@@ -21,7 +21,7 @@ export function HoursTable({ className }: { className?: string }) {
             <tr key={h.day} className={cn("border-b border-line/70", today && "text-gold-lift")}>
               <th scope="row" className="py-3 pr-4 font-medium">
                 {h.day}
-                {today && <span className="eyebrow ml-3 text-[0.65rem] text-gold">Today</span>}
+                {today && <span className="eyebrow ml-3 text-[0.75rem] text-gold">Today</span>}
               </th>
               <td className={cn("py-3 text-right tabular-nums", today ? "text-gold-lift" : "text-bone")}>
                 {h.open && h.close ? `${fmtTime(h.open)} – ${fmtTime(h.close)}` : "Closed"}

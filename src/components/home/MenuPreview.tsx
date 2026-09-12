@@ -9,7 +9,7 @@ export function MenuPreview() {
     <section className="grain relative py-24 md:py-32" aria-labelledby="menu-title" id="menu">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl lg:max-w-none">
             {/* Ru's own hand-lettered header style from his Square site, carried over on purpose */}
             <h2 id="menu-title" className="spray tag -rotate-2 pb-2 text-[clamp(3rem,8vw,6.4rem)] leading-[1.1] text-gold lg:whitespace-nowrap">
               Service Menu

@@ -8,7 +8,7 @@ import { BookLink } from "@/components/BookLink";
 import { FaqList } from "@/components/FaqList";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
-import { PAGE_SERVICES, serviceBySlug, ADDONS, fmtDuration } from "@/data/services";
+import { PAGE_SERVICES, serviceBySlug, ADDONS, fmtDuration, withThe } from "@/data/services";
 import { REVIEWS } from "@/data/reviews";
 import { FAQS } from "@/data/faqs";
 import { BUSINESS } from "@/data/business";
@@ -61,7 +61,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         intro={<p>{s.summary}</p>}
       >
         <div className="rise mt-9 flex flex-wrap items-center gap-4" style={{ ["--d" as string]: "320ms" }}>
-          <BookLink label={`Book the ${s.name}`}>Book this Experience</BookLink>
+          <BookLink label={`Book ${withThe(s.name)}`}>Book this Experience</BookLink>
           <p className="flex items-center gap-5 text-bone">
             <span className="display text-4xl text-gold">${s.price}</span>
             <span className="flex items-center gap-2 text-bone-dim">
@@ -163,7 +163,7 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
         </div>
       </section>
 
-      <CtaBand title={`Book the ${s.short}.`} text={`$${s.price} · about ${fmtDuration(s.minutes)} · Salon Lofts Hollywood, Loft 13. Booking online is quick, simple and open 24/7.`} />
+      <CtaBand title={`Book ${withThe(s.short)}.`} text={`$${s.price} · about ${fmtDuration(s.minutes)} · Salon Lofts Hollywood, Loft 13. Booking online is quick, simple and open 24/7.`} />
     </>
   );
 }

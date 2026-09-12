@@ -7,7 +7,7 @@ import { BookLink } from "@/components/BookLink";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { ARTICLES, articleBySlug } from "@/data/journal";
-import { serviceBySlug } from "@/data/services";
+import { serviceBySlug, withThe } from "@/data/services";
 import { articleSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
 import { photo, largest } from "@/lib/photos";
@@ -78,7 +78,7 @@ export default async function ArticlePage({ params }: PageProps<"/journal/[slug]
               return (
                 <div key={i} className="my-12 flex flex-col gap-5 rounded-[3px] border border-line bg-ink-2 p-7 sm:flex-row sm:items-center sm:justify-between">
                   <p className="display text-2xl text-bone">{b.text}</p>
-                  <BookLink label={svc ? `Book the ${svc.name}` : "Book your experience"} className="shrink-0">
+                  <BookLink label={svc ? `Book ${withThe(svc.name)}` : "Book your experience"} className="shrink-0">
                     {svc ? `Book · $${svc.price}` : "Book now"}
                   </BookLink>
                 </div>
@@ -93,7 +93,7 @@ export default async function ArticlePage({ params }: PageProps<"/journal/[slug]
             <ul className="mt-5 space-y-4">
               {others.map((o) => (
                 <li key={o.slug}>
-                  <Link href={`/journal/${o.slug}/`} className="display text-2xl text-bone hover:text-gold-lift">
+                  <Link href={`/journal/${o.slug}/`} className="display inline-block py-1.5 text-2xl text-bone hover:text-gold-lift">
                     {o.title}
                   </Link>
                 </li>
