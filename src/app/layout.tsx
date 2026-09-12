@@ -23,6 +23,23 @@ export const metadata: Metadata = {
   creator: BUSINESS.name,
   formatDetection: { telephone: true, address: true, email: true },
   robots: { index: true, follow: true, "max-image-preview": "large" },
+  openGraph: {
+    type: "website",
+    siteName: BUSINESS.name,
+    locale: "en_US",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${BUSINESS.name} — Hollywood, FL barber`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.jpg"],
+  },
   other: {
     "geo.region": "US-FL",
     "geo.placename": "Hollywood",

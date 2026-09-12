@@ -5,7 +5,11 @@
  * See RESEARCH-DOSSIER.md for sources and the conflicts that still need Ru's sign-off.
  */
 
-export const SITE_URL = "https://www.rucutzpremiumgrooming.com";
+// Netlify sets URL at build time; override with NEXT_PUBLIC_SITE_URL when the custom domain goes live.
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.URL ??
+  "https://www.rucutzpremiumgrooming.com";
 
 export const BOOKING_URL =
   "https://book.squareup.com/appointments/evvnhmmwsq6wf1/location/L0RBE6MPVT4PF/services";
