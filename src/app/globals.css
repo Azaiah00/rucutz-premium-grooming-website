@@ -424,11 +424,15 @@ html.lenis body {
   grid-template-columns: 1fr 72px;
   gap: 2rem;
   min-height: 0;
+  /* Clip step images so they never bleed over the CTA row below. */
+  overflow: hidden;
 }
 .ritual.is-pinned .ritual-steps {
   position: relative;
   display: block;
+  height: 100%;
   min-height: 0;
+  overflow: hidden;
 }
 .ritual.is-pinned .ritual-step {
   position: absolute;
@@ -437,11 +441,17 @@ html.lenis body {
   grid-template-columns: 1.05fr 1fr;
   gap: 3.5rem;
   align-items: center;
+  height: 100%;
+  min-height: 0;
 }
 .ritual.is-pinned .ritual-img {
   order: 0 !important;
+  /* Percent height needs a definite chain; cap with max-height so intrinsic img size cannot spill. */
   height: 100%;
+  max-height: min(52vh, 100%);
+  min-height: 0;
   aspect-ratio: auto;
+  align-self: center;
 }
 .ritual.is-pinned .ritual-meter {
   display: flex;
@@ -450,7 +460,10 @@ html.lenis body {
   justify-content: center;
 }
 .ritual.is-pinned .ritual-cta {
+  position: relative;
+  z-index: 1;
   margin-top: 1.5rem;
+  flex-shrink: 0;
 }
 .ritual.is-pinned .ritual-head p.tag { margin-bottom: 0.25rem; }
 .ritual.is-pinned .ritual-head h2 { font-size: clamp(2.2rem, 4.2vw, 3.6rem); }
